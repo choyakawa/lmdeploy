@@ -93,7 +93,7 @@ class ChatCompletionRequest(BaseModel):
     # yapf: disable
     messages: Union[str, List[Dict[str, Any]]] = Field(examples=[[{'role': 'user', 'content': 'hi'}]])  # noqa
     temperature: Optional[float] = 0.7
-    top_p: Optional[float] = 1.0
+    top_p: Optional[float] = 0.8
     tools: Optional[List[Tool]] = Field(default=None, examples=[None])
     tool_choice: Union[ToolChoice, Literal['auto', 'required','none']] = Field(default='auto', examples=['none'])  # noqa
     logprobs: Optional[bool] = False
@@ -110,7 +110,7 @@ class ChatCompletionRequest(BaseModel):
     frequency_penalty: Optional[float] = 0.0
     user: Optional[str] = None
     # additional argument of lmdeploy
-    repetition_penalty: Optional[float] = 1.0
+    repetition_penalty: Optional[float] = 1.05
     session_id: Optional[int] = -1
     ignore_eos: Optional[bool] = False
     skip_special_tokens: Optional[bool] = True
