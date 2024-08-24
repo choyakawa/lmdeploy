@@ -108,19 +108,19 @@ class ChatCompletionRequest(BaseModel):
     stream_options: Optional[StreamOptions] = Field(default=None,
                                                     examples=[None])
     presence_penalty: Optional[float] = 0.0
-    frequency_penalty: Optional[float] = 0.1
+    frequency_penalty: Optional[float] = 0.0
     user: Optional[str] = None
     # additional argument of lmdeploy
-    repetition_penalty: Optional[float] = 1
+    repetition_penalty: Optional[float] = 1.1
     session_id: Optional[int] = -1
     ignore_eos: Optional[bool] = False
     skip_special_tokens: Optional[bool] = True
     top_k: Optional[int] = 35
     seed: Optional[int] = None
     
-    @validator('frequency_penalty', pre=True, always=True)
-    def set_min_frequency_penalty(cls, v):
-        if v is not None and v < 0.1:
+    @validator('repetition_penalty', pre=True, always=True)
+    def set_min_repetition_penalty(cls, v):
+        if v is not None and v < 1.1:
             return 0.1
         return v
 
