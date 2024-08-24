@@ -121,7 +121,7 @@ class ChatCompletionRequest(BaseModel):
     @validator('repetition_penalty', pre=True, always=True)
     def set_min_repetition_penalty(cls, v):
         if v is not None and v < 1.1:
-            return 0.1
+            return 1.1
         return v
 
 class FunctionResponse(BaseModel):
