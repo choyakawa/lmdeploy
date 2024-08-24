@@ -1629,12 +1629,18 @@ class Glm4Chat(ChatGLM3):
                  user='<|user|>\n',
                  assistant='<|assistant|>\n',
                  stop_words=['<|user|>', '<|endoftext|>', '<|observation|>'],
+                 eosys='\n',
+                 eoh='\n',
+                 eoa='\n',
                  **kwargs):
         super().__init__(system=system,
                          meta_instruction=meta_instruction,
                          user=user,
                          assistant=assistant,
                          stop_words=stop_words,
+                         eosys=eosys,
+                         eoh=eoh,
+                         eoa=eoa,
                          **kwargs)
         self.start = '[gMASK]<sop>'
 
