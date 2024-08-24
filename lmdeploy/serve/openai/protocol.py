@@ -92,7 +92,7 @@ class ChatCompletionRequest(BaseModel):
     model: str
     # yapf: disable
     messages: Union[str, List[Dict[str, Any]]] = Field(examples=[[{'role': 'user', 'content': 'hi'}]])  # noqa
-    temperature: Optional[float] = 0.7
+    temperature: Optional[float] = 0.27
     top_p: Optional[float] = 0.8
     tools: Optional[List[Tool]] = Field(default=None, examples=[None])
     tool_choice: Union[ToolChoice, Literal['auto', 'required','none']] = Field(default='auto', examples=['none'])  # noqa
@@ -107,16 +107,21 @@ class ChatCompletionRequest(BaseModel):
     stream_options: Optional[StreamOptions] = Field(default=None,
                                                     examples=[None])
     presence_penalty: Optional[float] = 0.0
-    frequency_penalty: Optional[float] = 0.0
+    frequency_penalty: Optional[float] = 0.1
     user: Optional[str] = None
     # additional argument of lmdeploy
-    repetition_penalty: Optional[float] = 1.05
+    repetition_penalty: Optional[float] = 1
     session_id: Optional[int] = -1
     ignore_eos: Optional[bool] = False
     skip_special_tokens: Optional[bool] = True
-    top_k: Optional[int] = 40
+    top_k: Optional[int] = 35
     seed: Optional[int] = None
-
+    
+    @validator('frequency_penalty', pre=True, always=True)
+    def set_min_frequency_penalty(cls, v):
+        if v is not None and v < 0.1:
+            return 0.1
+        return v
 
 class FunctionResponse(BaseModel):
     """Function response."""
