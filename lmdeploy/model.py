@@ -1625,11 +1625,13 @@ class Glm4Chat(ChatGLM3):
 
     def __init__(self,
                  system='<|system|>\n',
+                 meta_instruction='You are a helpful assistant.',
                  user='<|user|>\n',
                  assistant='<|assistant|>\n',
                  stop_words=['<|user|>', '<|endoftext|>', '<|observation|>'],
                  **kwargs):
         super().__init__(system=system,
+                         meta_instruction=meta_instruction,
                          user=user,
                          assistant=assistant,
                          stop_words=stop_words,
