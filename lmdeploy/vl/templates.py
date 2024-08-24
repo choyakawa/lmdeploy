@@ -340,7 +340,9 @@ class MiniCPMV26TempateWrapper(MiniCPMVTempateWrapper):
 
 class GLM4VChatTemplateWrapper(VLChatTemplateWrapper):
     """glm-4v chat template."""
-    pass
+    def append_image_token(self, prompt, num_images: int):
+        """append image token to user prompt."""
+        return ("<|begin_of_image|>" + IMAGE_TOKEN  + "<|end_of_image|>" + '\n') * num_images + prompt
 
 
 def get_vl_prompt_template(model_path: str, chat_template: BaseModel,
