@@ -10,6 +10,9 @@ from transformers import AutoConfig
 from lmdeploy.vl.model.base import VISION_MODELS, VisonModel
 from lmdeploy.vl.model.utils import disable_logging
 
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+Image.MAX_IMAGE_PIXELS = None
 
 @VISION_MODELS.register_module()
 class GLM4VisionModel(VisonModel):
